@@ -11,5 +11,9 @@ for filename in os.listdir(directory):
     if os.path.isfile(file):
         name = os.path.splitext(filename)[0]
         newDir = os.path.join(directory, name)
-        shutil.unpack_archive(file, newDir)
-        os.remove(file)
+        try:
+            shutil.unpack_archive(file, newDir)
+            os.remove(file)
+        except:
+            # fail silently; assume this is not an archive or is not meant to be unpacked by this script
+            pass
